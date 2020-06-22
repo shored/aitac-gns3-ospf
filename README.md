@@ -6,6 +6,7 @@
 * qemu-utils
 
 * This scripts also need nbd kernel module.
+
     % modprobe nbd max_part=16
 
 ## usage
