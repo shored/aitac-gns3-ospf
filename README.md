@@ -1,8 +1,11 @@
 # aitac-gns3-ospf
 
 ## requrement
-* qemu-nbd
-This scripts also need nbd kernel module.
+* required packages
+** python3
+** qemu-utils
+
+* This scripts also need nbd kernel module.
     % modprobe nbd max_part=16
 
 ## usage
