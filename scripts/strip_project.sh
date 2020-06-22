@@ -7,6 +7,10 @@ if [ $# -ne 1 ]; then
 	exit 1
 fi
 
+if [ ! -d $WORKDIR ]; then
+	mkdir $WORKDIR
+fi
+
 get_conf_file () {
 	echo $PROJECT_DIR/project-files/qemu/$3/hda_disk.qcow2
 	sudo qemu-nbd -c /dev/nbd0 $PROJECT_DIR/project-files/qemu/$3/hda_disk.qcow2
