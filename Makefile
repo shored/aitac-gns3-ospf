@@ -1,11 +1,15 @@
 #SUBDIRS = scripts images
 
-IMGDIR = ./images
+GNS3ROOT = ~/GNS3
 
-PROJROOT  = work_dir
+IMGDIR = $(GNS3ROOT)/images
+PROJROOT  = $(GNS3ROOT)/projects
+SOURCEROOT = ./word_dir
+
+FRRIMAGE = frr7.1-vm0.4.qcow2
 
 OBJROOT   = ../obj
-PROJDIRS  := $(find $(PROJROOT) -type d)
+SOURCEDIRS  := $(find $(SOURCEROOT) -type d)
 PROJFILES   = $(foreach dir, $(PROJDIRS), $(wildcard $(dir)/images.conf))
 # 上記のcppファイルのリストを元にオブジェクトファイル名を決定
 OBJECTS   = $(addprefix $(OBJROOT)/, $(SOURCES:.cpp=.o))
@@ -14,8 +18,12 @@ OBJDIRS   = $(addprefix $(OBJROOT)/, $(SRCDIRS))
 
 .SUFFIXES: .qcow2
 
-fetch: ./images/frr7.0-vm0.3.qcow2
+#fetch: $(IMGDIR)/frr7.0-vm0.3.qcow2
 
-./images/frr7.0-vm0.3.qcow2:
-        wget https://sourceforge.net/projects/frr/files/FRR7.0-VM0.3.qcow2.bz2/download -O ./$IMGDIR/frr7.0-vm0.3.qcow2.bz2
-        bzip2 -d ./$IMGDIR/frr7.0-vm0.3.qcow2.bz2
+$(IMGDIR)/$(FRRIMAGE).md5sum: $(IMGDIR)/$(FRRIMAGE)
+	openssl md5 $(IMGDIR)/$(FRRIMAGE) | awk '{print $2}' > $(IMGDIR)/$(FRRIMAGE).md5sum
+
+$(IMGDIR)/$(FRRIMAGE):
+	wget https://sourceforge.net/projects/frr/files/$(FRRIMAGE).bz2/download -O ./$(IMGDIR)/$(FRRIMAGE)
+	bzip2 -d ./$(IMGDIR)/$(FRRIMAGE).bz2
+
