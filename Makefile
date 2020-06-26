@@ -24,6 +24,6 @@ $(IMGDIR)/$(FRRIMAGE).md5sum: $(IMGDIR)/$(FRRIMAGE)
 	openssl md5 $(IMGDIR)/$(FRRIMAGE) | awk '{print $2}' > $(IMGDIR)/$(FRRIMAGE).md5sum
 
 $(IMGDIR)/$(FRRIMAGE):
-	wget https://sourceforge.net/projects/frr/files/$(FRRIMAGE).bz2/download -O ./$(IMGDIR)/$(FRRIMAGE)
-	bzip2 -d ./$(IMGDIR)/$(FRRIMAGE).bz2
+	wget https://sourceforge.net/projects/frr/files/$(FRRIMAGE).bz2/download -O $(IMGDIR)/$(FRRIMAGE)
+	bzip2 -d $(IMGDIR)/$(FRRIMAGE).bz2
 
