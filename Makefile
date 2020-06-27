@@ -21,7 +21,7 @@ OBJDIRS   = $(addprefix $(OBJROOT)/, $(SRCDIRS))
 #fetch: $(IMGDIR)/frr7.0-vm0.3.qcow2
 
 $(IMGDIR)/$(FRRIMAGE).md5sum: $(IMGDIR)/$(FRRIMAGE)
-	openssl md5 $(IMGDIR)/$(FRRIMAGE) | awk '{print $2}' > $(IMGDIR)/$(FRRIMAGE).md5sum
+	openssl md5 $(IMGDIR)/$(FRRIMAGE) | awk '{print $$2}' > $(IMGDIR)/$(FRRIMAGE).md5sum
 
 $(IMGDIR)/$(FRRIMAGE):
 	wget https://sourceforge.net/projects/frr/files/$(FRRIMAGE).bz2/download -O $(IMGDIR)/$(FRRIMAGE)
