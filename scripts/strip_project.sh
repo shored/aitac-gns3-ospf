@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WORKDIR='../work_dir'
+source ./configs.txt
 
 if [ $# -ne 1 ]; then
 	echo "usage: strip_project <project file>"
