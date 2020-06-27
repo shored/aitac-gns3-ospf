@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ./configs.txt
+. ./configs.txt
 
 if [ $# -ne 1 ]; then
 	echo "usage: strip_project <project file>"
