@@ -7,6 +7,8 @@ import os
 import gns3_utils as utils
 
 WORKDIR='../work_dir'
+VYOS_IMAGE='empty8G.qcow2'
+FRR_IMAGE='frr7.0-vm0.3.qcow2'
 
 def extract_nodes(project_json, outfile):
     #return nodes from json
@@ -14,9 +16,9 @@ def extract_nodes(project_json, outfile):
 
     for node in project_json['topology']['nodes']:
         if node['node_type'] == 'qemu':
-            if node['properties']['hda_disk_image'] == 'empty8G.qcow2':
+            if node['properties']['hda_disk_image'] == VYOS_IMAGE:
                 outfile.write("/mnt/boot/1.1.8/live-rw/config/config.boot"+"\t"+"vyos"+"\t"+node['node_id']+"\n")
-            elif node['properties']['hda_disk_image'] == 'frr7.0-vm0.3.qcow2':
+            elif node['properties']['hda_disk_image'] == FRR_IMAGE:
                 outfile.write("/mnt/etc/frr/frr.conf"+"\t"+"frr"+"\t"+node['node_id']+"\n")
             else:
                 outfile.write("unsupported qemu nodes\n")
