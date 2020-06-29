@@ -18,7 +18,7 @@ get_conf_file () {
 	if [ $2 = 'vyos' ]; then
 		sudo mount /dev/nbd0p1 /mnt
 	elif [ $2 = 'frr' ]; then
-		sudo mount /dev/nbd0p3 /mnt
+		sudo mount /dev/nbd0p2 /mnt
 	fi
 	cp $1 $PROJECT_DIR/project-files/qemu/$3/
 	sudo umount /mnt
