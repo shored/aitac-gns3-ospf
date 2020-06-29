@@ -1,2 +1,5 @@
-PROJECT_DIR=~/GNS3/projects
+GNS3ROOT=~/GNS3
+PROJECT_DIR=$(GNSROOT)/projects
+IMGDIR=$(GNS3ROOT)/images
 WORKDIR='../work_dir'
+FRRIMAGE=frr7.1-vm0.4.qcow2
