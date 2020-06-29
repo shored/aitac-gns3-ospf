@@ -7,7 +7,7 @@ do
         if [ -e $i/images.conf ]; then
                 for j in $i/project-files/qemu/*
                 do
-			qemu-img create -b $(IMGDIR)/$(FRRIMAGE) -f qcow2 $j/hda_disk.qcow2
+			qemu-img create -b $IMGDIR/$FRRIMAGE -f qcow2 $j/hda_disk.qcow2
                         sleep 1
                         qemu-nbd -c /dev/nbd0 $j/hda_disk.qcow2
                         sleep 1
