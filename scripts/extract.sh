@@ -2,6 +2,8 @@
 
 . ./configs.txt
 
+cp -R $WORKDIR/* $PROJECT_DIR
+
 for i in $(find /home/gns3/GNS3/projects -maxdepth 1 -type d | tail -n +2)
 do
         if [ -e $i/images.conf ]; then
