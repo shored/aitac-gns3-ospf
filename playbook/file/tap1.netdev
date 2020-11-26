@@ -1,0 +1,4 @@
+[NetDev]
+Name=tap1
+Kind=tap
+User=gns3
