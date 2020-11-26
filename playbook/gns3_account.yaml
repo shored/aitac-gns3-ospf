@@ -1,0 +1,22 @@
+- hosts: users
+  become: yes
+  vars: 
+    - username: ubuntu
+    - group: ubuntu
+  tasks:
+                     
+    - name: stop gns3 service
+      service:
+        name: gns3
+        state: stopped
+        
+    - name: copy gns3_server.conf
+      copy: src=gns3_server.conf dest=/home/gns3/.config/GNS3 owner=gns3 group=gns3
+
+    - name: copy gns3_server.conf
+      copy: src=gns3_server.conf dest=/home/gns3/.config/GNS3/2.2 owner=gns3 group=gns3
+
+    - name: restart gns3 service
+      service:
+        name: gns3
+        state: started

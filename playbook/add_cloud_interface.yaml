@@ -1,0 +1,42 @@
+- hosts: test-sho
+  become: yes
+  vars: 
+    - username: ubuntu
+    - group: ubuntu
+  tasks:
+
+    - name: install iptables-persistent
+      apt:
+        name:
+          - iptables-persistent
+
+    - name: copy tap1.netdev
+      copy: src=files/tap1.netdev dest=/etc/systemd/network/ owner=root group=root
+
+    - name: Read /etc/netplan/50-cloud-init.yaml
+      slurp:
+        path: /etc/netplan/50-cloud-init.yaml
+      register: remote_netplan
+
+    - name: extract /etc/netplan/50-cloud-init.yaml
+      set_fact:
+        netplan_data: "{{ remote_netplan['content'] | b64decode | from_yaml }}"
+
+    - name: edit yaml
+      set_fact:
+        merged_netplan: "{{ netplan_data | combine(tap, recursive=True) }}"
+      vars:
+        tap:
+          network:
+            ethernets:
+              tap1:
+                addresses:
+                  - 192.168.10.1/30
+
+    - name: copy merged yaml
+      copy:
+        content: '{{ merged_netplan | to_nice_yaml }}'
+        dest: /etc/netplan/50-cloud-init.yaml
+
+    - name: copy /etc/iptables/rules.v4
+      copy: src=files/rules.v4 dest=/etc/iptables/ owner=root group=root
