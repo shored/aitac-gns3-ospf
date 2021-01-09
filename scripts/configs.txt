@@ -1,5 +1,5 @@
-GNS3ROOT=~/GNS3
+GNS3ROOT=/home/gns3/GNS3
 PROJECT_DIR=$GNS3ROOT/projects
 IMGDIR=$GNS3ROOT/images
 WORKDIR='../work_dir'
-FRRIMAGE=frr7.1-vm0.4.qcow2
+FRRIMAGE=QEMU/frr7.1-vm0.4.qcow2

@@ -1,9 +1,7 @@
 #!/bin/sh
 
-SCRIPT_DIR=~/scripts
+SCRIPT_DIR=~/aitac-gns3-ospf/scripts
 PROJECT_DIR=/home/gns3/GNS3/projects
-OSPF_TEMPLATE=926385bd-c2f2-4023-b578-34689dfab6d9
-OSPF_TEMPLATE_NAME="06_OSPF_ts.gns3"
 
 if [ $# -ne 2 ]; then
   echo "usage: copy_project <src_project_id> <dst_project_name>"
@@ -29,7 +27,11 @@ mv $PROJECT_DIR/$SRC_PROJECT_ID.clone $PROJECT_DIR/$new_project_id
 
 cat "$SRC_TEMPLATE_FILE"
 
-python3 $SCRIPT_DIR/modify_project.py "$SRC_PROJECT_FILE" $PROJECT_NAME $new_project_id
+DST_PROJECT_FILE=$(ls $PROJECT_DIR/$new_project_id/*.gns3)
+
+python3 $SCRIPT_DIR/modify_project.py "$DST_PROJECT_FILE" $PROJECT_NAME $new_project_id
+rm $DST_PROJECT_FILE
+chown -R gns3:gns3 $PROJECT_DIR/$new_project_id
 
 # rename project file
 #mv "$PROJECT_FILE"

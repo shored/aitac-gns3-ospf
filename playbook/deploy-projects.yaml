@@ -1,0 +1,31 @@
+- hosts: test-sho
+  become: yes
+  vars: 
+    - username: ubuntu
+    - group: ubuntu
+  tasks:
+    - name: Copy all Projects
+      synchronize:
+        src: /home/gns3/GNS3/projects
+        dest: /home/gns3/GNS3/
+        compress: no
+        recursive: yes
+
+    - name: Copy all Images
+      synchronize:
+        src: /home/gns3/GNS3/images
+        dest: /home/gns3/GNS3/
+        compress: no
+        recursive: yes
+
+    - name: chown project files
+      file:
+        path: /home/gns3/GNS3
+        owner: gns3
+        group: gns3
+        recurse: yes
+
+    - name: restart gns3 service
+      service:
+        name: gns3
+        state: restarted
